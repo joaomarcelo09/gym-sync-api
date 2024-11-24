@@ -1,0 +1,31 @@
+services:
+  # app:
+  #   image: gym-sync-api-app
+  #   profiles:
+  #     - app
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     SPRING_APPLICATION_NAME: gymsync-app
+  #     SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/gymsyncdb
+  #     SPRING_DATASOURCE_USERNAME: admin
+  #     SPRING_DATASOURCE_PASSWORD: 123456
+  #     SPRING_DATASOURCE_DRIVER-CLASS-NAME: org.postgresql.Driver
+  #   depends_on:
+  #     - postgres
+
+  postgres:
+    profiles:
+      - database
+      - app
+    container_name: gymsync-db
+    image: postgres
+    environment:
+      POSTGRES_DB: gymsyncdb
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 123456
+    ports:
+      - 5432:5432 
