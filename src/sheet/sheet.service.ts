@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateSheetDto } from './dto/create-sheet.dto';
 import { UpdateSheetDto } from './dto/update-sheet.dto';
 import { SheetRepository } from './sheet.repository';
@@ -14,8 +14,35 @@ export class SheetService {
     return `This action returns all sheet`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} sheet`;
+  async findOne(opt) {
+    return await this.repository.findOne(opt);
+  }
+
+  async findSheetForAthlete(opt) {
+    const optSheet = {
+      where: {
+        weight: {
+          gte: opt.weight - 5,
+          lte: opt.weight + 5,
+        },
+        height: {
+          gte: opt.height - 5,
+          lte: opt.height + 5,
+        },
+        biotype: opt.biotype,
+      },
+      include: {},
+    };
+
+    const findSheet = await this.repository.findOne(optSheet);
+
+    if (!findSheet)
+      throw new HttpException(
+        'Sheet not found for this athlete',
+        HttpStatus.NOT_FOUND,
+      );
+
+    return findSheet;
   }
 
   async update(id: string, updateSheetDto: UpdateSheetDto) {

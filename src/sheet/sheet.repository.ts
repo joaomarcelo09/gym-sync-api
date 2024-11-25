@@ -34,4 +34,8 @@ export class SheetRepository {
   async update(id: string, data: UpdateSheetDto) {
     return await this.prisma.sheet.update({ where: { id }, data });
   }
+
+  async findOne({ where, include }) {
+    return await this.prisma.sheet.findFirst({ where, include });
+  }
 }
