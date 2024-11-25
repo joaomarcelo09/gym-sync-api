@@ -4,10 +4,16 @@ import { AthleteController } from './athlete.controller';
 import { PrismaService } from 'src/database/prisma.service';
 import { AthleteRepository } from './athlete.repository';
 import { SheetService } from 'src/sheet/sheet.service';
+import { SheetRepository } from 'src/sheet/sheet.repository';
 
 @Module({
-  imports: [AthleteRepository],
   controllers: [AthleteController],
-  providers: [AthleteService, PrismaService, SheetService],
+  providers: [
+    AthleteService,
+    PrismaService,
+    SheetService,
+    SheetRepository,
+    AthleteRepository,
+  ],
 })
 export class AthleteModule {}

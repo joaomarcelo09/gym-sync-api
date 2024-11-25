@@ -5,8 +5,7 @@ import { PrismaService } from 'src/database/prisma.service';
 import { ExerciseRepository } from './exercise.repository';
 
 @Module({
-  imports: [ExerciseRepository],
   controllers: [ExerciseController],
-  providers: [ExerciseService, PrismaService],
+  providers: [ExerciseService, PrismaService, ExerciseRepository],
 })
 export class ExerciseModule {}
