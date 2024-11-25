@@ -15,10 +15,58 @@ datasource db {
 
 model Athlete {
   id        String   @id
+  idSheet   String
   name      String
-  height    String
-  weight    String
+  height    Int
+  weight    Int
   biotype   String
   createdAt DateTime @map("created_at")
   updateAt  DateTime @map("updated_at")
+
+  sheet Sheet @relation(fields: [idSheet], references: [id])
+
+  @@map("athlete")
+}
+
+model Sheet {
+  id             String           @id
+  idAthlete      String
+  weight         Int
+  height         Int
+  biotype        String
+  Athlete        Athlete[]
+  SheetExercises SheetExercises[]
+
+  @@map("sheet")
+}
+
+model SheetExercises {
+  id          String @id
+  idSheet     String
+  idIntensity String
+  idExercise  String
+
+  sheet     Sheet     @relation(fields: [idSheet], references: [id])
+  intensity Intensity @relation(fields: [idIntensity], references: [id])
+  exercise  Exercise  @relation(fields: [idExercise], references: [id])
+
+  @@map("sheet_exercises")
+}
+
+model Intensity {
+  id             String           @id
+  rounds         String
+  repetition     String
+  SheetExercises SheetExercises[]
+
+  @@map("intensities")
+}
+
+model Exercise {
+  id             String           @id
+  name           String
+  type           String
+  SheetExercises SheetExercises[]
+
+  @@map("exercises")
 }
