@@ -30,7 +30,6 @@ model Athlete {
 
 model Sheet {
   id             String           @id
-  idAthlete      String
   weight         Int
   height         Int
   biotype        String
@@ -42,9 +41,9 @@ model Sheet {
 
 model SheetExercises {
   id          String @id
-  idSheet     String
-  idIntensity String
-  idExercise  String
+  idSheet     String @map("id_sheet")
+  idIntensity String @map("id_intensity")
+  idExercise  String @map("id_exercise")
 
   sheet     Sheet     @relation(fields: [idSheet], references: [id])
   intensity Intensity @relation(fields: [idIntensity], references: [id])

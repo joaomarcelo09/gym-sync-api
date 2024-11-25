@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/database/prisma.service';
 import { CreateIntensityDto } from './dto/create-intensity.dto';
 import { randomUUID } from 'crypto';
-import { UpdateExerciseDto } from 'src/exercise/dto/update-exercise.dto';
+import { UpdateIntensityDto } from './dto/update-intensity.dto';
 
 @Injectable()
 export class IntensityRepository {
@@ -17,7 +17,7 @@ export class IntensityRepository {
     });
   }
 
-  async update(id: string, data: UpdateExerciseDto) {
+  async update(id: string, data: UpdateIntensityDto) {
     return await this.prisma.intensity.update({ where: { id }, data });
   }
 }

@@ -1,11 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { CreateIntensityDto } from './dto/create-intensity.dto';
 import { UpdateIntensityDto } from './dto/update-intensity.dto';
+import { IntensityRepository } from './intensity.repository';
 
 @Injectable()
 export class IntensityService {
-  create(createIntensityDto: CreateIntensityDto) {
-    return 'This action adds a new intensity';
+  constructor(private repository: IntensityRepository) {}
+  async create(data: CreateIntensityDto) {
+    return await this.repository.create(data);
   }
 
   findAll() {
@@ -16,8 +18,8 @@ export class IntensityService {
     return `This action returns a #${id} intensity`;
   }
 
-  update(id: number, updateIntensityDto: UpdateIntensityDto) {
-    return `This action updates a #${id} intensity`;
+  async update(id: string, data: UpdateIntensityDto) {
+    return await this.repository.update(id, data);
   }
 
   remove(id: number) {

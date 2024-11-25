@@ -31,11 +31,11 @@ export class ExerciseController {
   }
 
   @Patch(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateExerciseDto: UpdateExerciseDto,
   ) {
-    return this.exerciseService.update(id, updateExerciseDto);
+    return await this.exerciseService.update(id, updateExerciseDto);
   }
 
   @Delete(':id')
