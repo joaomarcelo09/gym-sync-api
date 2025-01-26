@@ -15,7 +15,7 @@ datasource db {
 
 model Athlete {
   id        String   @id
-  idSheet   String
+  idSheet   String   @map("id_sheet")
   name      String
   height    Int
   weight    Int
@@ -54,6 +54,7 @@ model SheetExercises {
 
 model Intensity {
   id             String           @id
+  idSeeder       String           @map("id_seeder")
   rounds         String
   repetition     String
   SheetExercises SheetExercises[]
@@ -63,6 +64,7 @@ model Intensity {
 
 model Exercise {
   id             String           @id
+  idSeeder       String           @map("id_seeder")
   name           String
   type           String
   SheetExercises SheetExercises[]
